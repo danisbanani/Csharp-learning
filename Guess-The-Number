@@ -1,1 +1,108 @@
+using static System.Console;
+using System.Diagnostics;
+using System.Security.Permissions;
+namespace Guess_The_Number
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Game();
+        }
+        static void Difficulty()
+        {
+            Random rnd = new Random();
+            string difficulty;
+            int computer_int;
+            do
+            {
+                WriteLine("Choose a difficulty. (easy, normal, hard)");
+                difficulty = ReadLine().ToLower();
+
+            } while (difficulty != "easy" && difficulty != "normal" && difficulty != "hard");
+            if (difficulty == "easy") 
+            { 
+                computer_int = rnd.Next(1, 50);
+            }
+            else if (difficulty == "normal") 
+            { 
+                computer_int = rnd.Next(1, 100); 
+            }
+            else 
+            { 
+                computer_int = rnd.Next(1, 1000);
+            }
+            GuessTheNumber(computer_int);
+        }
+        static void GuessTheNumber(int computer_int)
+        {
+            Stopwatch sw = new Stopwatch();
+            int tries = 0;
+            WriteLine($"Guess the number!{computer_int}");
+            int user_int;
+            sw.Start();
+            while (!int.TryParse(ReadLine(), out user_int))
+            {
+                WriteLine("YOU CAN ONLY GUESS WITH INTEGERS!");
+                continue;
+            }
+            while(user_int != computer_int)
+            {
+                tries++;
+                if (computer_int > user_int)
+                {
+                    WriteLine("Higher!");
+                    while (!int.TryParse(ReadLine(), out user_int))
+                    {
+                        WriteLine("YOU CAN ONLY GUESS WITH INTEGERS!");
+                        continue;
+                    }
+                }
+                else if (computer_int < user_int)
+                {
+                    WriteLine("Lower!");
+                    while (!int.TryParse(ReadLine(), out user_int))
+                    {
+                        WriteLine("YOU CAN ONLY GUESS WITH INTEGERS!");
+                        continue;
+                    }
+                }
+            }
+            tries++;
+            sw.Stop();
+            double sec = sw.Elapsed.TotalSeconds;
+            if (tries > 1) { WriteLine($"|You guessed the number {computer_int}!\n|Tries:{tries}\n|Seconds:{sec:F2}"); }
+            else { WriteLine($"|You guessed the number {computer_int}!\n|First try! GJ!\n|Seconds:{sec:F2}"); }
+        }
+        static bool AskToPlayAgain()
+        {
+            WriteLine("Play again?");
+            string ans = ReadLine().ToLower();
+
+            while (ans != "yes" && ans != "no")
+            {
+                WriteLine("Play again?");
+                ans = ReadLine().ToLower();
+            }
+
+            if (ans == "yes")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        static void Game()
+        {
+            do
+            {
+                Difficulty();
+            }
+            while (AskToPlayAgain());
+                
+        }
+    }
+}
 
