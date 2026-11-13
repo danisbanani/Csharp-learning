@@ -21,15 +21,15 @@ namespace Guess_The_Number
             } while (difficulty != "easy" && difficulty != "normal" && difficulty != "hard");
             if (difficulty == "easy") 
             { 
-                computer_int = rnd.Next(1, 50);
+                computer_int = rnd.Next(1, 51);
             }
             else if (difficulty == "normal") 
             { 
-                computer_int = rnd.Next(1, 100); 
+                computer_int = rnd.Next(1, 101); 
             }
             else 
             { 
-                computer_int = rnd.Next(1, 1000);
+                computer_int = rnd.Next(1, 1001);
             }
             GuessTheNumber(computer_int);
         }
@@ -67,8 +67,8 @@ namespace Guess_The_Number
                     }
                 }
             }
-            tries++;
             sw.Stop();
+            tries++;
             double sec = sw.Elapsed.TotalSeconds;
             if (tries > 1) { WriteLine($"|You guessed the number {computer_int}!\n|Tries:{tries}\n|Seconds:{sec:F2}"); }
             else { WriteLine($"|You guessed the number {computer_int}!\n|First try! GJ!\n|Seconds:{sec:F2}"); }
@@ -76,7 +76,7 @@ namespace Guess_The_Number
         static bool AskToPlayAgain()
         {
             WriteLine("Play again?");
-            string ans = ReadLine().ToLower();
+            string ans = ReadLine().ToLower().Trim();
 
             while (ans != "yes" && ans != "no")
             {
