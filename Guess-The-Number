@@ -38,7 +38,7 @@ namespace Guess_The_Number
         {
             Stopwatch sw = new Stopwatch();
             int tries = 0;
-            WriteLine($"Guess the number!{computer_int}");
+            WriteLine("Guess the number!");
             int user_int;
             sw.Start();
             while (!int.TryParse(ReadLine(), out user_int))
