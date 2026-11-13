@@ -1,6 +1,5 @@
 using static System.Console;
 using System.Diagnostics;
-using System.Security.Permissions;
 namespace Guess_The_Number
 {
     internal class Program
